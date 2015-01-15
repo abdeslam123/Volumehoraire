@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>vhWeb</display-name>
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+    
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+
+ 
+  	<security-constraint>
+		<display-name>Example Security Constraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>Protected Area</web-resource-name>
+			<url-pattern>/protectedAdmin/*</url-pattern>
+			
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>GLOB</role-name>
+		</auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>	
+        		
+	</security-constraint>
+	
+	<security-constraint>
+		<display-name>Example Security Constraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>Protected Area</web-resource-name>
+			<url-pattern>/protectedETAB/*</url-pattern>
+			
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ETAB</role-name>
+		</auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>			
+	</security-constraint>	
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>jBossJaasMysqlRealm</realm-name>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/error.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+	<security-role>
+		<description> A user </description>
+		<role-name>GLOB</role-name>
+	</security-role>
+  <security-role>
+		<description> A user </description>
+		<role-name>ETAB</role-name>
+	</security-role>  
+	
+<error-page>
+    <error-code>404</error-code>
+    <location>/error.xhtml</location>
+</error-page>
+
+<error-page>
+    <error-code>403</error-code>
+    <location>/error.xhtml</location>
+</error-page>
+<error-page>
+    <error-code>500</error-code>
+    <location>/error.xhtml</location>
+</error-page>
+	
+</web-app>
